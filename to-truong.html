@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Báo cáo tổ — Góc Chủ Nhiệm</title>
+<!-- App tổ trưởng · «Góc Chủ Nhiệm» · trang dùng chung: mở bằng link riêng của từng tổ (#cfg=…) · chỉ có mã HS · nút «Gửi lên» (nếu có) gửi vào Google Trang tính của GVCN. ✅ BẢN NHÁP — thầy/cô duyệt trước khi dùng. -->
+<style>*{box-sizing:border-box}body{margin:0;font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:#1e2433;background:radial-gradient(700px 400px at 0 0,#e9e4ff 0,transparent 60%),radial-gradient(600px 400px at 100% 0,#ffe9da 0,transparent 55%),#f5f3fb;min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}
+.top{color:#fff;padding:14px 16px;display:flex;gap:12px;align-items:center}.top h1{margin:0;font-size:21px}.top p{margin:0;font-size:13px;opacity:.9}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;margin:0 auto 4px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+.wrap{max-width:980px;margin:0 auto;padding:12px}.card{background:#fff;border:1px solid #e7e3f1;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 8px 22px rgba(60,40,120,.08)}
+.card h2{margin:0 0 10px;font-size:16px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid #d0d5dd;background:#fff;border-radius:11px;padding:8px 13px;font-weight:600;min-height:40px}.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff;border:0}.btn.ok{background:linear-gradient(120deg,#16a34a,#0d9488);color:#fff;border:0}.btn.big{font-size:17px;padding:12px 18px;border-radius:14px}
+.tcs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px}.tc{border:2px solid transparent;border-radius:13px;padding:8px 11px;font-weight:700;font-size:14px}
+.tc.k{background:#ecfdf3;color:#166534}.tc.n{background:#fff4ea;color:#9a3412}.tc.on.k{border-color:#16a34a}.tc.on.n{border-color:#ea580c}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px}
+.hs{position:relative;border:2px solid #e7e3f1;background:#fff;border-radius:16px;padding:9px 5px 7px;text-align:center;user-select:none}.hs:active{transform:scale(.95)}
+.hs b{display:block;font-size:13px}.hs i{display:block;font-size:12px;color:#667085;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc{position:absolute;top:5px;left:6px;font-size:11px;font-weight:800;border-radius:999px;padding:0 6px;background:#dcfce7;color:#166534}.sc.m{background:#ffedd5;color:#9a3412}
+.ed{position:absolute;top:3px;right:4px;border:0;background:transparent;font-size:13px;padding:2px}
+.hint{border-radius:12px;padding:9px 12px;font-size:13.5px;margin:8px 0;background:#e0f2fe;color:#0c4a6e}.hint.ok{background:#dcfce7;color:#14532d}.hint.warn{background:#fef3c7;color:#78350f}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid #eee;padding:5px 6px;text-align:center}th{background:#f7f5fc;font-size:12px}td:first-child,th:first-child{text-align:left}
+.tbl{overflow:auto}textarea{width:100%;border:1px solid #d0d5dd;border-radius:12px;padding:10px}.code{font-family:Consolas,monospace;font-size:12px;background:#f8fafc;min-height:90px}
+.float{position:fixed;font-weight:900;font-size:22px;pointer-events:none;animation:up 1s forwards}@keyframes up{to{transform:translateY(-44px);opacity:0}}
+.foot{font-size:12.5px;color:#6b4e00;background:#fff7d6;border:1px solid #f0dc8a;border-radius:12px;padding:8px 12px}
+#tst{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#1e2433;color:#fff;border-radius:12px;padding:10px 14px;display:none;max-width:92vw;z-index:9}</style></head><body>
+<header class="top" id="tTop" style="background:linear-gradient(120deg,#4f46e5,#4f46e5)"><svg width="46" height="46" viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="8" width="44" height="50" rx="8" fill="#fff"/><rect x="22" y="3" width="20" height="10" rx="4" fill="#facc15"/><path d="M19 26h26M19 35h26M19 44h16" stroke="#4f46e5" stroke-width="4" stroke-linecap="round"/><circle cx="48" cy="48" r="10" fill="#16a34a"/><path d="M43 48l4 4 7-8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+<div><h1 id="tH">BÁO CÁO TỔ</h1><p id="tP">dành cho tổ trưởng</p></div></header>
+<main class="wrap"><div id="app"></div></main><div id="tst"></div>
+<script>window.CFG=(function(){try{var m=location.hash.match(/cfg=([A-Za-z0-9_-]+)/);if(m){var c=JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/')))));try{localStorage.setItem('gcn_to_cfg',JSON.stringify(c));}catch(e){}return c;}var l=localStorage.getItem('gcn_to_cfg');return l?JSON.parse(l):null;}catch(e){return null;}})();(function TO_APP_MAIN(){
+  const C = window.CFG;
+  if (!C || !C.cls){ document.querySelector('#app').innerHTML = '<div class="card"><h2>📱 App báo cáo tổ</h2><p>Hãy mở bằng <b>đường link thầy/cô chủ nhiệm gửi</b> (link có phần «#cfg=…»). Mỗi tổ một link riêng — không chuyển link cho người khác.</p></div><div class="foot">✅ BẢN NHÁP — thầy/cô duyệt trước khi dùng. App chỉ có mã bạn (HS01…).</div>'; return; }
+  document.title = 'Báo cáo tổ ' + C.to + ' — lớp ' + C.lop;
+  const tH = document.querySelector('#tH'), tP = document.querySelector('#tP'), tT = document.querySelector('#tTop');
+  if (tH) tH.textContent = 'BÁO CÁO TỔ ' + C.to; if (tP) tP.textContent = 'Lớp ' + C.lop + ' · dành cho tổ trưởng · gửi ' + C.xung + ' chủ nhiệm mỗi tuần'; if (tT) tT.style.background = 'linear-gradient(120deg,' + C.col + ',#4f46e5)';
+  const KEY = 'gcn_to_' + C.cls + '_' + C.to;
+  const $ = s => document.querySelector(s), esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const pad = n => String(n).padStart(2, '0'), dt = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d, 12); };
+  const isoOf = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()), addDays = (iso, n) => { const d = dt(iso); d.setDate(d.getDate() + n); return isoOf(d); };
+  const today = () => isoOf(new Date()), vnS = iso => iso.slice(8) + '/' + iso.slice(5, 7);
+  const weekOf = iso => Math.floor((dt(iso) - dt(C.tuan1)) / 864e5 / 7) + 1, weekRange = n => { const a = addDays(C.tuan1, (n - 1) * 7); return [a, addDays(a, 6)]; };
+  const TU = { _k: { id: '_k', ten: 'Khen việc khác (tự ghi)', d: 1, icon: '✍️' }, _n: { id: '_n', ten: 'Nhắc việc khác (tự ghi)', d: -1, icon: '✍️' } };
+  const tcOf = id => C.tc.find(t => t.id === id) || TU[id] || { id, ten: '?', d: 0, icon: '•' };
+  const isTu = id => id === '_k' || id === '_n', dOf = l => l.d ?? tcOf(l.tc).d;
+  const sach = t => String(t || '').replace(/\d{4,}/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  let S = null; try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+  S = S && S.log ? S : { log: [], nx: {}, ten: {}, gui: {} };
+  S.gan = S.gan || { _k: [], _n: [] }; S.len = S.len || {};
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast('Máy không cho lưu — đừng tắt trang trước khi gửi cô'); } };
+  let wk = Math.max(1, weekOf(today())), tcSel = (C.tc[0] || {}).id, code = '', tt = '';
+  const nd = { _k: '', _n: '' }, diem = { _k: 1, _n: -1 };
+  let AC = null; const ding = ok => { try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); (ok ? [660, 880] : [330, 262]).forEach((f, i) => { const o = AC.createOscillator(), g = AC.createGain(), t = AC.currentTime + i * .09; o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.1, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .22); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + .25); }); } catch (e) {} };
+  const toast = m => { const t = $('#tst'); t.textContent = m; t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => t.style.display = 'none', 3400); };
+  const inWeek = () => { const [a, b] = weekRange(wk); return S.log.filter(l => l.ngay >= a && l.ngay <= b); };
+  const ngayGhi = () => { const [a, b] = weekRange(wk), t = today(); return t >= a && t <= b ? t : addDays(a, 4); };
+  const net = ma => inWeek().filter(l => (l.ma || '') === (ma || '')).reduce((s, l) => s + dOf(l), 0);
+  function counts(){ const n = {}, ca = {}; inWeek().forEach(l => { if (isTu(l.tc)) return; if (l.ma){ n[l.ma] = n[l.ma] || {}; n[l.ma][l.tc] = (n[l.ma][l.tc] || 0) + 1; } else ca[l.tc] = (ca[l.tc] || 0) + 1; }); return { n, ca }; }
+  function render(){
+    const [a, b] = weekRange(wk), tc = tcOf(tcSel), L = inWeek(), tu = isTu(tcSel), G = L.filter(l => isTu(l.tc));
+    const pal = pos => C.tc.filter(t => pos ? t.d > 0 : t.d < 0).map(t => `<button class="tc ${pos ? 'k' : 'n'} ${t.id === tcSel ? 'on' : ''}" data-a="tc" data-id="${t.id}">${esc(t.icon)} ${esc(t.ten)} ${t.d > 0 ? '+' : ''}${t.d}</button>`).join('')
+      + `<button class="tc ${pos ? 'k' : 'n'} ${tcSel === (pos ? '_k' : '_n') ? 'on' : ''}" data-a="tc" data-id="${pos ? '_k' : '_n'}" style="border-style:dashed;border-color:${pos ? '#16a34a' : '#ea580c'}">✍️ ${pos ? 'Khen' : 'Nhắc'} việc khác…</button>`;
+    const tot = L.reduce((s, l) => s + dOf(l), 0);
+    const tuBox = tu ? `<div class="tu" style="background:${tcSel === '_k' ? '#ecfdf3' : '#fff4ea'};border-radius:14px;padding:10px;margin:8px 0">
+        <b>${tcSel === '_k' ? '✍️ Ghi việc tốt cần khen' : '✍️ Ghi việc cần nhắc nhở'}</b>
+        <div class="row" style="margin-top:6px"><input id="nd" value="${esc(nd[tcSel])}" maxlength="120" placeholder="${tcSel === '_k' ? 'VD: nhặt được của rơi trả lại' : 'VD: chạy giỡn trên hành lang'}" style="flex:1;min-width:200px;border:1px solid #d0d5dd;border-radius:10px;padding:9px">
+        <select id="dd" style="border:1px solid #d0d5dd;border-radius:10px;padding:9px">${(tcSel === '_k' ? [1, 2] : [-1, -2]).map(v => `<option value="${v}" ${v === diem[tcSel] ? 'selected' : ''}>${v > 0 ? '+' : ''}${v} điểm</option>`).join('')}</select></div>
+        ${S.gan[tcSel].length ? `<div class="row" style="margin-top:6px">${S.gan[tcSel].map((g, i) => `<button class="btn" style="min-height:30px;padding:3px 10px;font-size:13px" data-a="gan" data-i="${i}">${esc(g)}</button>`).join('')}</div>` : ''}
+        <p style="font-size:12.5px;color:#667085;margin:6px 0 0">Gõ nội dung → chạm vào bạn. Chỉ ghi <b>việc làm</b>, không ghi họ tên, số điện thoại.</p></div>` : '';
+    $('#app').innerHTML = `
+    <div class="card"><div class="row"><button class="btn" data-a="wk" data-n="-1">‹</button><b>Tuần ${wk}</b><span>(${vnS(a)} – ${vnS(b)})</span><button class="btn" data-a="wk" data-n="1">›</button><span style="margin-left:auto;font-weight:800;color:${C.col}">Tổ ${C.to}: ${tot > 0 ? '+' : ''}${tot}</span></div></div>
+    <div class="card"><h2>① Chọn việc — ② chạm vào bạn</h2><b style="font-size:12px;color:#166534">KHEN</b><div class="tcs">${pal(true)}</div><b style="font-size:12px;color:#9a3412">NHẮC NHỞ</b><div class="tcs">${pal(false)}</div>
+      ${tuBox || `<div class="hint ${tc.d > 0 ? 'ok' : 'warn'}">Đang chọn: <b>${esc(tc.icon)} ${esc(tc.ten)}</b> — chạm vào bạn để ghi${C.hs.length ? '' : ' (tổ chưa có bạn nào)'}</div>`}
+      <div class="grid">${C.hs.map(h => { const v = net(h.ma); return `<div class="hs" data-a="hs" data-ma="${h.ma}">${v ? `<span class="sc ${v < 0 ? 'm' : ''}">${v > 0 ? '+' : ''}${v}</span>` : ''}<button class="ed" data-a="ten" data-ma="${h.ma}" title="Đặt tên gọi">✏️</button><div class="av" style="background:${C.col}">${parseInt(h.ma.replace(/\D/g, ''), 10)}</div><b>${h.ma}</b><i>${esc(S.ten[h.ma] || h.cv || '')}</i></div>`; }).join('')}
+        <div class="hs" data-a="hs" data-ma="" style="border-style:dashed"><div class="av" style="background:#475467">★</div><b>Cả tổ</b><i>cả tổ cùng làm</i></div></div>
+      <div class="row" style="margin-top:10px"><button class="btn" data-a="undo">↶ Hoàn tác</button><span style="font-size:12.5px;color:#667085">✏️ đặt tên gọi cho dễ nhớ — tên chỉ lưu trên máy này, không gửi đi.</span></div></div>
+    <div class="card"><h2>📋 Bảng tuần ${wk}</h2><div class="tbl"><table><tr><th>Bạn</th>${C.tc.map(t => `<th title="${esc(t.ten)}">${esc(t.icon)}</th>`).join('')}<th title="Việc tự ghi">✍️</th><th>Điểm</th></tr>
+      ${[...C.hs.map(h => [h.ma, h.ma + (S.ten[h.ma] ? ' · ' + S.ten[h.ma] : '')]), ['', 'Cả tổ']].map(([ma, lb]) => { const mine = L.filter(l => (l.ma || '') === ma); return `<tr><td><b>${esc(lb)}</b></td>${C.tc.map(t => { const k = mine.filter(l => l.tc === t.id).length; return `<td>${k || ''}</td>`; }).join('')}<td>${mine.filter(l => isTu(l.tc)).length || ''}</td><td><b>${net(ma)}</b></td></tr>`; }).join('')}</table></div>
+      ${G.length ? `<p style="margin:10px 0 4px"><b>✍️ Việc tự ghi tuần này</b></p>${G.map(l => `<div class="row" style="justify-content:space-between;border-bottom:1px solid #eee;padding:4px 0"><span>${vnS(l.ngay)} · ${l.ma || 'Cả tổ'} · <b style="color:${dOf(l) > 0 ? '#166534' : '#9a3412'}">${dOf(l) > 0 ? '+' : ''}${dOf(l)}</b> ${esc(l.nd)}</span><button class="btn" style="min-height:30px;padding:2px 9px" data-a="del" data-id="${l.id}">✕</button></div>`).join('')}` : ''}
+      ${L.length ? `<details style="margin-top:8px"><summary>Tất cả lượt đã ghi (${L.length}) — bấm ✕ để xoá lượt ghi nhầm</summary>${L.slice().reverse().map(l => `<div class="row" style="justify-content:space-between;border-bottom:1px solid #eee;padding:4px 0"><span>${vnS(l.ngay)} · ${l.ma || 'Cả tổ'} · ${esc(tcOf(l.tc).icon)} ${esc(l.nd || tcOf(l.tc).ten)}</span><button class="btn" style="min-height:30px;padding:2px 9px" data-a="del" data-id="${l.id}">✕</button></div>`).join('')}</details>` : ''}</div>
+    <div class="card"><h2>✍️ Nhận xét của tổ trưởng (tuần ${wk})</h2><textarea id="nx" rows="3" placeholder="VD: Tổ đi học đầy đủ; bạn HS05 hay giúp bạn; tuần sau cả tổ nhắc nhau mang đủ đồ dùng.">${esc(S.nx[wk] || '')}</textarea></div>
+    <div class="card"><h2>📤 Gửi báo cáo cho ${esc(C.xung)} chủ nhiệm</h2>
+      ${C.url ? `<button class="btn ok big" data-a="len">🚀 Gửi lên cho ${esc(C.xung)} (tuần ${wk})</button>
+        ${tt === 'dang' ? `<div class="hint">⏳ Đang gửi…</div>` : tt === 'ok' ? `<div class="hint ok">✔ Đã gửi lên lúc ${esc(S.len[wk])}. ${esc(C.xung)} sẽ thấy khi mở app. Ghi thêm thì bấm gửi lại — ${esc(C.xung)} nhận bản mới nhất.</div>` : tt ? `<div class="hint warn">⚠️ ${esc(tt)} — dùng cách dưới: tạo mã rồi chép gửi qua Zalo.</div>` : S.len[wk] ? `<div class="hint ok">Lần gửi lên gần nhất: ${esc(S.len[wk])}</div>` : ''}
+        <p style="font-size:13px;color:#667085;margin:8px 0">Không có mạng? Tạo mã rồi gửi qua Zalo:</p><button class="btn" data-a="gui">📤 Tạo mã báo cáo</button>`
+      : `<button class="btn ok big" data-a="gui">📤 Tạo mã báo cáo tuần ${wk}</button>`}
+      ${code ? `<div class="hint ok">Đã tạo mã. Bấm <b>📋 Chép mã</b> → mở Zalo → dán gửi ${esc(C.xung)} (hoặc tải file gửi kèm).</div><textarea class="code" readonly id="code">${code}</textarea>
+      <div class="row" style="margin-top:8px"><button class="btn pri" data-a="chep">📋 Chép mã</button><button class="btn" data-a="tai">⬇ Tải file báo cáo</button></div>` : ''}</div>
+    <div class="foot">✅ BẢN NHÁP — thầy/cô duyệt trước khi dùng. Báo cáo của tổ trưởng chỉ là đề xuất; ${esc(C.xung)} chủ nhiệm kiểm lại rồi mới tính điểm. App chỉ có mã bạn (HS01…)${C.url ? '; nút «Gửi lên» cần mạng, gửi vào Google Trang tính của ' + esc(C.xung) + ' chủ nhiệm' : ', không cần mạng'}.</div>`;
+  }
+  function makeCode(){
+    const { n, ca } = counts(), [a] = weekRange(wk);
+    const g = inWeek().filter(l => isTu(l.tc)).map(l => ({ ma: l.ma || null, d: dOf(l), nd: l.nd, ngay: l.ngay }));
+    const P = { k: 'GCN-BC', v: 2, cls: C.cls, lop: C.lop, to: C.to, wk, from: a, n, ca, g, nx: (S.nx[wk] || '').trim(), tcv: C.tcv, luc: new Date().toISOString() };
+    return 'GCN-BC:' + btoa(unescape(encodeURIComponent(JSON.stringify(P))));
+  }
+  async function guiLen(){
+    const ma = makeCode(); tt = 'dang'; render();
+    try {
+      const r = await fetch(C.url, { method: 'POST', body: JSON.stringify({ loai: 'gui', to: C.to, wk, khoa: C.khoa, code: ma }) });
+      const j = await r.json();
+      if (j.ok){ S.len[wk] = new Date().toLocaleString('vi-VN'); save(); tt = 'ok'; ding(true); } else tt = 'Chưa gửi được: ' + (j.loi || 'lỗi lạ');
+    } catch (e) { tt = navigator.onLine === false ? 'Máy chưa có mạng' : 'Không gửi được (mạng yếu hoặc đường link hộp thư đã đổi)'; }
+    render();
+  }
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-a]'); if (!el) return; const A = el.dataset.a;
+    if (A === 'tc'){ tcSel = el.dataset.id; render(); if (isTu(tcSel)){ const i = $('#nd'); if (i) i.focus(); } }
+    else if (A === 'wk'){ wk = Math.max(1, wk + +el.dataset.n); code = ''; tt = ''; render(); }
+    else if (A === 'gan'){ nd[tcSel] = S.gan[tcSel][+el.dataset.i]; render(); }
+    else if (A === 'hs'){
+      const t = tcOf(tcSel), ma = el.dataset.ma || null, rec = { id: Math.random().toString(36).slice(2, 9), ngay: ngayGhi(), ma, tc: t.id };
+      if (isTu(tcSel)){ const v = sach(nd[tcSel]); if (!v){ toast('Gõ nội dung việc trước, rồi chạm vào bạn'); const i = $('#nd'); if (i) i.focus(); return; } rec.nd = v; rec.d = diem[tcSel]; S.gan[tcSel] = [v, ...S.gan[tcSel].filter(x => x !== v)].slice(0, 8); }
+      S.log.push(rec); save(); ding(dOf(rec) > 0); code = ''; tt = '';
+      const r = el.getBoundingClientRect(), f = document.createElement('div'); f.className = 'float'; f.textContent = (dOf(rec) > 0 ? '+' : '') + dOf(rec) + ' ' + t.icon; f.style.color = dOf(rec) > 0 ? '#16a34a' : '#ea580c'; f.style.left = (r.left + r.width / 2 - 14) + 'px'; f.style.top = r.top + 'px'; document.body.appendChild(f); setTimeout(() => f.remove(), 1000); render(); }
+    else if (A === 'ten'){ e.stopPropagation(); const v = prompt('Tên gọi của ' + el.dataset.ma + ' (chỉ lưu trên máy này, không gửi đi):', S.ten[el.dataset.ma] || ''); if (v != null){ S.ten[el.dataset.ma] = v.replace(/\d{4,}/g, '').trim().slice(0, 24); save(); render(); } }
+    else if (A === 'undo'){ const L = inWeek(); if (!L.length) return toast('Chưa có lượt nào để hoàn tác'); const last = L[L.length - 1]; S.log = S.log.filter(l => l !== last); save(); code = ''; render(); }
+    else if (A === 'del'){ S.log = S.log.filter(l => l.id !== el.dataset.id); save(); code = ''; render(); }
+    else if (A === 'gui'){ code = makeCode(); S.gui[wk] = new Date().toLocaleString('vi-VN'); save(); ding(true); render(); }
+    else if (A === 'len'){ guiLen(); }
+    else if (A === 'chep'){ const t = $('#code').value; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('📋 Đã chép — dán vào Zalo gửi ' + C.xung), () => { $('#code').select(); try { document.execCommand('copy'); toast('📋 Đã chép'); } catch (er) { toast('Bôi đen mã rồi chép tay'); } }); }
+    else if (A === 'tai'){ const b = new Blob([JSON.stringify({ ma: $('#code').value })], { type: 'application/json' }), x = document.createElement('a'); x.href = URL.createObjectURL(b); x.download = 'Bao cao to ' + C.to + ' - tuan ' + wk + ' - lop ' + C.lop + '.json'; document.body.appendChild(x); x.click(); setTimeout(() => x.remove(), 2000); }
+  });
+  document.addEventListener('input', e => { if (e.target.id === 'nx'){ S.nx[wk] = e.target.value; save(); code = ''; } else if (e.target.id === 'nd') nd[tcSel] = e.target.value; });
+  document.addEventListener('change', e => { if (e.target.id === 'dd') diem[tcSel] = +e.target.value; });
+  render();
+})();</script>
+</body></html>
